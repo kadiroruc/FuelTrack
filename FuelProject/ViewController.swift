@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     var viewModel = ViewModel()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var userInputKm: Int16?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +24,8 @@ class ViewController: UIViewController {
             print("Error loading image")
         }
         
+        
+        
     }
 
 }
@@ -32,25 +33,9 @@ class ViewController: UIViewController {
 //MARK: - view model
 extension ViewController : ViewModelDelegate{
     func didUpdateQR() {
-        let fuelLiter = self.viewModel.getFuelLiterFromQRMessage()
+        
         getCurrentKMFromUser()
         
-        let purchaseObject = FuelPurchase(context: self.context)
-        purchaseObject.date = self.viewModel.getDate()
-        
-        if let fuelLiterInt = Float(fuelLiter){
-            purchaseObject.liter = fuelLiterInt
-        }
-        
-        purchaseObject.previousKM = 1200
-        
-        if let userInputKm = userInputKm{
-            purchaseObject.nextKM = userInputKm
-        }
-        
-        self.viewModel.addPurchase(purchaseObject: purchaseObject)
-        
-        print(self.viewModel.getPurchases())
         
     }
     
@@ -66,7 +51,20 @@ extension ViewController : ViewModelDelegate{
             if let textField = alertController.textFields?.first, let userInput = textField.text {
                 //print("Kullanıcıdan alınan bilgi: \(userInput)")
                 if let userInputInt = Int16(userInput){
-                    self.userInputKm = userInputInt
+                    
+                    let fuelLiter = self.viewModel.getFuelLiterFromQRMessage()
+                    let nextKmOfLastObject = self.viewModel.getLastPurchaseKm()
+                    
+                    let purchaseObject = FuelPurchase(context: self.context)
+                    purchaseObject.date = Date()
+                    purchaseObject.liter = fuelLiter
+                    
+                    purchaseObject.previousKM = nextKmOfLastObject
+                    purchaseObject.nextKM = userInputInt
+
+                    self.viewModel.addPurchase(purchaseObject: purchaseObject)
+
+                    print(self.viewModel.getLastPurchaseObject())
                 }
                 
             }
