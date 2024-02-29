@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E976F6F82B8DDE8B002E06F7 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976F6F72B8DDE8B002E06F7 /* ListCollectionViewController.swift */; };
+		E976F6FA2B8DDEBF002E06F7 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976F6F92B8DDEBF002E06F7 /* ListCollectionViewCell.swift */; };
 		E9F142CB2B7F908200F9CEF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F142CA2B7F908200F9CEF4 /* AppDelegate.swift */; };
 		E9F142CD2B7F908200F9CEF4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F142CC2B7F908200F9CEF4 /* SceneDelegate.swift */; };
 		E9F142CF2B7F908200F9CEF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F142CE2B7F908200F9CEF4 /* ViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E976F6F72B8DDE8B002E06F7 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
+		E976F6F92B8DDEBF002E06F7 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		E9F142C72B7F908200F9CEF4 /* FuelProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FuelProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F142CA2B7F908200F9CEF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9F142CC2B7F908200F9CEF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +45,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E99C2C432B9085DF0085F1FA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E9F142CA2B7F908200F9CEF4 /* AppDelegate.swift */,
+				E9F142CC2B7F908200F9CEF4 /* SceneDelegate.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E99C2C442B9085EB0085F1FA /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E9F142CE2B7F908200F9CEF4 /* ViewController.swift */,
+				E976F6F72B8DDE8B002E06F7 /* ListCollectionViewController.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		E99C2C452B9085F80085F1FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E9F142D82B7F908200F9CEF4 /* LaunchScreen.storyboard */,
+				E9F142D02B7F908200F9CEF4 /* Main.storyboard */,
+				E976F6F92B8DDEBF002E06F7 /* ListCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E99C2C462B9086020085F1FA /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				E9F142E12B7F908A00F9CEF4 /* ViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		E99C2C472B9086110085F1FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E9F142D32B7F908200F9CEF4 /* DataModel.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E99C2C482B9086190085F1FA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E9F142D62B7F908200F9CEF4 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E9F142BE2B7F908200F9CEF4 = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +116,13 @@
 		E9F142C92B7F908200F9CEF4 /* FuelProject */ = {
 			isa = PBXGroup;
 			children = (
-				E9F142CA2B7F908200F9CEF4 /* AppDelegate.swift */,
-				E9F142CC2B7F908200F9CEF4 /* SceneDelegate.swift */,
-				E9F142CE2B7F908200F9CEF4 /* ViewController.swift */,
-				E9F142E12B7F908A00F9CEF4 /* ViewModel.swift */,
-				E9F142D02B7F908200F9CEF4 /* Main.storyboard */,
-				E9F142D62B7F908200F9CEF4 /* Assets.xcassets */,
-				E9F142D82B7F908200F9CEF4 /* LaunchScreen.storyboard */,
+				E99C2C432B9085DF0085F1FA /* Core */,
+				E99C2C442B9085EB0085F1FA /* View Controller */,
+				E99C2C462B9086020085F1FA /* View Model */,
+				E99C2C472B9086110085F1FA /* Model */,
+				E99C2C452B9085F80085F1FA /* View */,
+				E99C2C482B9086190085F1FA /* Resources */,
 				E9F142DB2B7F908200F9CEF4 /* Info.plist */,
-				E9F142D32B7F908200F9CEF4 /* DataModel.xcdatamodeld */,
 			);
 			path = FuelProject;
 			sourceTree = "<group>";
@@ -145,9 +199,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9F142E22B7F908A00F9CEF4 /* ViewModel.swift in Sources */,
+				E976F6FA2B8DDEBF002E06F7 /* ListCollectionViewCell.swift in Sources */,
 				E9F142CF2B7F908200F9CEF4 /* ViewController.swift in Sources */,
 				E9F142CB2B7F908200F9CEF4 /* AppDelegate.swift in Sources */,
 				E9F142CD2B7F908200F9CEF4 /* SceneDelegate.swift in Sources */,
+				E976F6F82B8DDE8B002E06F7 /* ListCollectionViewController.swift in Sources */,
 				E9F142D52B7F908200F9CEF4 /* DataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

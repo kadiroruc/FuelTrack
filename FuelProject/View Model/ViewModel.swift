@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol ViewModelDelegate: AnyObject{
-    func didUpdateQR()
+    func didUpdate()
 }
 
 class ViewModel{
@@ -18,11 +18,13 @@ class ViewModel{
     var qrMessage: String?
     
     var fuelPurchases = [FuelPurchase]()
+    var filteredPurchases = [FuelPurchase]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init(){
         
         loadPurchases()
+        getMonthPurchaseDatas()
     }
     
     func readQRCode(from image: UIImage) {
@@ -42,7 +44,7 @@ class ViewModel{
         for feature in features {
             if let qrCodeFeature = feature as? CIQRCodeFeature {
                 self.qrMessage = qrCodeFeature.messageString
-                self.delegate?.didUpdateQR()
+                self.delegate?.didUpdate()
                 return
             }
         }
@@ -138,6 +140,52 @@ extension ViewModel{
             return 0
         }
     }
+    
+    
+    func getMonthPurchaseDatas(){
+        let currentDate = Date()
+        
+        
+        let calendar = Calendar.current
+        
+        let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))
+
+        let endDate = calendar.date(byAdding: DateComponents(month: 1, day: 0), to: startDate!)
+        
+        
+        
+        let fetchRequest: NSFetchRequest<FuelPurchase> = FuelPurchase.fetchRequest()
+        
+        
+        fetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startDate! as NSDate, endDate! as NSDate)
+        
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            
+            self.filteredPurchases = results
+            self.delegate?.didUpdate()
+        } catch {
+            print("Error fetching data: \(error)")
+        }
+    }
+    
+    func deleteAllDatas(){
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FuelPurchase")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try context.execute(batchDeleteRequest)
+            try context.save()
+            fuelPurchases.removeAll()
+            filteredPurchases.removeAll()
+            self.getMonthPurchaseDatas()
+            print("All records deleted.")
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
 }
 
 //MARK: - Data Manipulating
@@ -145,9 +193,42 @@ extension ViewModel{
     func addPurchase(purchaseObject: FuelPurchase){
         fuelPurchases.append(purchaseObject)
         self.savePurchases()
+        self.getMonthPurchaseDatas()
     }
     
     func getPurchases() -> [FuelPurchase]{
         return fuelPurchases
     }
+    
+    func getMonthlyFuelCost() -> Float {
+        
+        var totalLiter:Float = 0.0
+    
+        for purchase in filteredPurchases{
+            
+            totalLiter += purchase.liter
+        }
+        return totalLiter
+    }
+    
+    func getMonthlyKm() -> Int16{
+        
+        guard let firstObj = filteredPurchases.first else{return 0}
+        guard let lastObj = filteredPurchases.last else{return 0}
+        
+        let totalKm = lastObj.nextKM - firstObj.previousKM
+        return totalKm
+    }
+    
+    func getMonthlyAverageFuelConsumption() -> Float{
+        let totalLiter = getMonthlyFuelCost()
+        
+        let totalKm = getMonthlyKm()
+        
+        let averageConsumption = (totalLiter / Float(totalKm)) * 100 // in 100 km
+        
+        return averageConsumption
+    }
+    
+
 }
