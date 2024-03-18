@@ -28,7 +28,7 @@
 		E976F6F92B8DDEBF002E06F7 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		E9AB97192B95B8770061FE84 /* ColumnChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnChartView.swift; sourceTree = "<group>"; };
 		E9AB971B2B95B9FF0061FE84 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
-		E9F142C72B7F908200F9CEF4 /* Fuel Track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fuel Track.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9F142C72B7F908200F9CEF4 /* FuelTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FuelTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F142CA2B7F908200F9CEF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9F142CC2B7F908200F9CEF4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E9F142CE2B7F908200F9CEF4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		E9F142BE2B7F908200F9CEF4 = {
 			isa = PBXGroup;
 			children = (
-				E9F142C92B7F908200F9CEF4 /* Fuel Track */,
+				E9F142C92B7F908200F9CEF4 /* FuelTrack */,
 				E9F142C82B7F908200F9CEF4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,12 +117,12 @@
 		E9F142C82B7F908200F9CEF4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E9F142C72B7F908200F9CEF4 /* Fuel Track.app */,
+				E9F142C72B7F908200F9CEF4 /* FuelTrack.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E9F142C92B7F908200F9CEF4 /* Fuel Track */ = {
+		E9F142C92B7F908200F9CEF4 /* FuelTrack */ = {
 			isa = PBXGroup;
 			children = (
 				E99C2C432B9085DF0085F1FA /* Core */,
@@ -133,15 +133,15 @@
 				E99C2C482B9086190085F1FA /* Resources */,
 				E9F142DB2B7F908200F9CEF4 /* Info.plist */,
 			);
-			path = "Fuel Track";
+			path = FuelTrack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E9F142C62B7F908200F9CEF4 /* Fuel Track */ = {
+		E9F142C62B7F908200F9CEF4 /* FuelTrack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E9F142DE2B7F908200F9CEF4 /* Build configuration list for PBXNativeTarget "Fuel Track" */;
+			buildConfigurationList = E9F142DE2B7F908200F9CEF4 /* Build configuration list for PBXNativeTarget "FuelTrack" */;
 			buildPhases = (
 				E9F142C32B7F908200F9CEF4 /* Sources */,
 				E9F142C42B7F908200F9CEF4 /* Frameworks */,
@@ -151,9 +151,9 @@
 			);
 			dependencies = (
 			);
-			name = "Fuel Track";
+			name = FuelTrack;
 			productName = FuelProject;
-			productReference = E9F142C72B7F908200F9CEF4 /* Fuel Track.app */;
+			productReference = E9F142C72B7F908200F9CEF4 /* FuelTrack.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -171,7 +171,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E9F142C22B7F908200F9CEF4 /* Build configuration list for PBXProject "Fuel Track" */;
+			buildConfigurationList = E9F142C22B7F908200F9CEF4 /* Build configuration list for PBXProject "FuelTrack" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -184,7 +184,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E9F142C62B7F908200F9CEF4 /* Fuel Track */,
+				E9F142C62B7F908200F9CEF4 /* FuelTrack */,
 			);
 		};
 /* End PBXProject section */
@@ -365,7 +365,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9W5Z8G2RNJ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Fuel Track/Info.plist";
+				INFOPLIST_FILE = FuelTrack/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -393,7 +393,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9W5Z8G2RNJ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Fuel Track/Info.plist";
+				INFOPLIST_FILE = FuelTrack/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -415,7 +415,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E9F142C22B7F908200F9CEF4 /* Build configuration list for PBXProject "Fuel Track" */ = {
+		E9F142C22B7F908200F9CEF4 /* Build configuration list for PBXProject "FuelTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E9F142DC2B7F908200F9CEF4 /* Debug */,
@@ -424,7 +424,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E9F142DE2B7F908200F9CEF4 /* Build configuration list for PBXNativeTarget "Fuel Track" */ = {
+		E9F142DE2B7F908200F9CEF4 /* Build configuration list for PBXNativeTarget "FuelTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E9F142DF2B7F908200F9CEF4 /* Debug */,
