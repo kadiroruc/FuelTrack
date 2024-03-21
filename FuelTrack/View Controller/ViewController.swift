@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     var viewModel = ViewModel()
     @IBOutlet var fuelLabel: UILabel!
     
+    private var albumQrContent = ""
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
@@ -22,11 +24,11 @@ class ViewController: UIViewController {
     
         viewModel.delegate = self
         
-        if let image = UIImage(named: "h"){
-            viewModel.readQRCode(from: image)
-        }else{
-            print("Error loading image")
-        }
+//        if let image = UIImage(named: "h"){
+//            viewModel.readQRCode(from: image)
+//        }else{
+//            print("Error loading image")
+//        }
         
         
         setupUI()
@@ -112,11 +114,23 @@ extension ViewController : ViewModelDelegate{
     }
     
     @objc func handleInputs(){
-        if self.viewModel.getLastPurchaseKm() == 0{
-            getFirstKmValue()
-        }else{
-            getCurrentKMFromUser()
-        }
+        let ac = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Camera", style: .default,handler: {[weak self] action in
+            let qrVC = QRScannerViewController()
+            self?.present(qrVC,animated: true)
+        }))
+        ac.addAction(UIAlertAction(title: "Album", style: .default,handler: {[weak self] action in
+//            let qrVC = QRReaderViewController(nibName: nil, bundle: nil)
+//            self.navigationController?.pushViewController(qrVC, animated: true)
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.sourceType = .photoLibrary
+            self?.present(picker, animated: true)
+        }))
+        present(ac, animated: true)
+        
+
+
     }
     
     func getCurrentKMFromUser(){
@@ -137,6 +151,7 @@ extension ViewController : ViewModelDelegate{
                 if let userInputInt = Int16(userInput){
                     
                     let fuelLiter = self.viewModel.getFuelLiterFromQRMessage()
+                    
 
                     let purchaseObject = FuelPurchase(context: self.context)
                     purchaseObject.date = Date()
@@ -199,3 +214,51 @@ extension ViewController : ViewModelDelegate{
     }
 }
 
+extension ViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+
+        guard let image = info[.originalImage] as? UIImage else {
+            return
+        }
+
+        guard let ciImage = CIImage(image: image) else {
+            fatalError("Hata: CIImage oluşturulamadı.")
+        }
+
+        let options = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
+        let qrDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: options)
+
+        let features = qrDetector!.features(in: ciImage)
+
+        if !features.isEmpty {
+            if let qrCodeFeature = features.first as? CIQRCodeFeature {
+                let qrCodeContent = qrCodeFeature.messageString
+
+                self.viewModel.qrMessage = qrCodeContent!
+                
+                if self.viewModel.getLastPurchaseKm() == 0{
+                    getFirstKmValue()
+                }else{
+                    getCurrentKMFromUser()
+                }
+                
+                
+            }
+        } else {
+            print("Hata: QR kodu bulunamadı.")
+            showError(title: "Error", message: "QR kodu bulunamadı.")
+        }
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func showError(title: String?,message: String?){
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+}

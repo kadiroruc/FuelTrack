@@ -15,7 +15,16 @@ protocol ViewModelDelegate: AnyObject{
 class ViewModel{
     
     weak var delegate: ViewModelDelegate?
-    var qrMessage: String?
+    private var _qrMessage: String = ""
+    
+    var qrMessage: String{
+        get{
+            return _qrMessage
+        }
+        set{
+            _qrMessage = newValue
+        }
+    }
     
     var fuelPurchases = [FuelPurchase]()
     var filteredPurchases = [FuelPurchase]()
@@ -27,44 +36,38 @@ class ViewModel{
         loadMonthPurchaseDatas()
     }
     
-    func readQRCode(from image: UIImage) {
-        guard let ciImage = CIImage(image: image) else {
-            print("CIImage conversion failed")
-            return
-        }
-        
-        let context = CIContext(options: nil)
-        let options = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
-        guard let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: options) else {
-            print("QR code detector setup failed")
-            return
-        }
-        
-        let features = detector.features(in: ciImage)
-        for feature in features {
-            if let qrCodeFeature = feature as? CIQRCodeFeature {
-                self.qrMessage = qrCodeFeature.messageString
-                self.delegate?.didUpdate()
-                return
-            }
-        }
-        
-    }
-    
-    func getQRMessage() -> String{
-        return qrMessage ?? ""
-    }
+//    func readQRCode(from image: UIImage) {
+//        guard let ciImage = CIImage(image: image) else {
+//            print("CIImage conversion failed")
+//            return
+//        }
+//
+//        let context = CIContext(options: nil)
+//        let options = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
+//        guard let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: options) else {
+//            print("QR code detector setup failed")
+//            return
+//        }
+//
+//        let features = detector.features(in: ciImage)
+//        for feature in features {
+//            if let qrCodeFeature = feature as? CIQRCodeFeature {
+//                self.qrMessage = qrCodeFeature.messageString
+//                self.delegate?.didUpdate()
+//                return
+//            }
+//        }
+//
+//    }
     
     func getFuelLiterFromQRMessage() -> Float{
-        if let qrMessage = qrMessage{
-            let separatedArray = qrMessage.split(separator: " ").map { String($0) }
-            var liter = separatedArray[4]
-            
-            if let commaIndex = liter.firstIndex(of: ","){
-                liter.replaceSubrange(commaIndex...commaIndex, with: ".")
-                if let literFloat = Float(liter){
-                    return literFloat
-                }
+        let separatedArray = qrMessage.split(separator: " ").map { String($0) }
+        var liter = separatedArray[4]
+        
+        if let commaIndex = liter.firstIndex(of: ","){
+            liter.replaceSubrange(commaIndex...commaIndex, with: ".")
+            if let literFloat = Float(liter){
+                return literFloat
             }
         }
         return 0

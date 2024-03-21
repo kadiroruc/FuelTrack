@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E90324AA2B9DF5BE006CC774 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90324A92B9DF5BE006CC774 /* ChartViewModel.swift */; };
+		E91CAB3E2BA88C350063BC44 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91CAB3D2BA88C350063BC44 /* QRScannerViewController.swift */; };
 		E976F6F82B8DDE8B002E06F7 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976F6F72B8DDE8B002E06F7 /* ListCollectionViewController.swift */; };
 		E976F6FA2B8DDEBF002E06F7 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976F6F92B8DDEBF002E06F7 /* ListCollectionViewCell.swift */; };
 		E9AB971A2B95B8770061FE84 /* ColumnChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AB97192B95B8770061FE84 /* ColumnChartView.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		E90324A92B9DF5BE006CC774 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
+		E91CAB3D2BA88C350063BC44 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		E976F6F72B8DDE8B002E06F7 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
 		E976F6F92B8DDEBF002E06F7 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		E9AB97192B95B8770061FE84 /* ColumnChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnChartView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				E9F142CE2B7F908200F9CEF4 /* ViewController.swift */,
 				E976F6F72B8DDE8B002E06F7 /* ListCollectionViewController.swift */,
 				E9AB971B2B95B9FF0061FE84 /* ChartViewController.swift */,
+				E91CAB3D2BA88C350063BC44 /* QRScannerViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9F142E22B7F908A00F9CEF4 /* ViewModel.swift in Sources */,
+				E91CAB3E2BA88C350063BC44 /* QRScannerViewController.swift in Sources */,
 				E976F6FA2B8DDEBF002E06F7 /* ListCollectionViewCell.swift in Sources */,
 				E9F142CF2B7F908200F9CEF4 /* ViewController.swift in Sources */,
 				E9AB971A2B95B8770061FE84 /* ColumnChartView.swift in Sources */,
