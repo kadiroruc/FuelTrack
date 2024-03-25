@@ -36,29 +36,6 @@ class ViewModel{
         loadMonthPurchaseDatas()
     }
     
-//    func readQRCode(from image: UIImage) {
-//        guard let ciImage = CIImage(image: image) else {
-//            print("CIImage conversion failed")
-//            return
-//        }
-//
-//        let context = CIContext(options: nil)
-//        let options = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
-//        guard let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: context, options: options) else {
-//            print("QR code detector setup failed")
-//            return
-//        }
-//
-//        let features = detector.features(in: ciImage)
-//        for feature in features {
-//            if let qrCodeFeature = feature as? CIQRCodeFeature {
-//                self.qrMessage = qrCodeFeature.messageString
-//                self.delegate?.didUpdate()
-//                return
-//            }
-//        }
-//
-//    }
     
     func getFuelLiterFromQRMessage() -> Float{
         let separatedArray = qrMessage.split(separator: " ").map { String($0) }

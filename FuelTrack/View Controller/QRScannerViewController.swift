@@ -8,11 +8,18 @@
 import AVFoundation
 import UIKit
 
+protocol QRScannerViewControllerDelegate: AnyObject {
+    func qrScannerViewControllerDidDismiss(_ result: String)
+}
+
 class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
-    var viewModel = ViewModel()
+    var qrMessage = ""
+    
+    weak var delegate: QRScannerViewControllerDelegate?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,12 +90,21 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
-            self.viewModel.qrMessage = stringValue
-            print(stringValue)
+            qrMessage = stringValue
+            
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             captureSession.stopRunning()
-
+            
+            dismissQRScanner()
+            
+            
             // QR kodu okundu, stringValue içinde QR kodun değeri bulunmaktadır
         }
+    }
+    
+    func dismissQRScanner() {
+        dismiss(animated: true, completion: {
+            self.delegate?.qrScannerViewControllerDidDismiss(self.qrMessage)
+        })
     }
 }

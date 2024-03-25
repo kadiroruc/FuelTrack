@@ -21,5 +21,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We need to use camera for qr</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need to use photo library for qr</string>
 </dict>
 </plist>

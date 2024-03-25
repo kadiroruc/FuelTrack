@@ -24,12 +24,6 @@ class ViewController: UIViewController {
     
         viewModel.delegate = self
         
-//        if let image = UIImage(named: "h"){
-//            viewModel.readQRCode(from: image)
-//        }else{
-//            print("Error loading image")
-//        }
-        
         
         setupUI()
         setupLabels()
@@ -107,9 +101,10 @@ class ViewController: UIViewController {
 }
 
 //MARK: - view model
-extension ViewController : ViewModelDelegate{
+extension ViewController : ViewModelDelegate,QRScannerViewControllerDelegate{
+    
     func didUpdate() {
-        
+        kmLabel.text = "12312"
         setupLabels()
     }
     
@@ -117,20 +112,33 @@ extension ViewController : ViewModelDelegate{
         let ac = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Camera", style: .default,handler: {[weak self] action in
             let qrVC = QRScannerViewController()
+            qrVC.delegate = self
+            
             self?.present(qrVC,animated: true)
+            
+            
+            
         }))
         ac.addAction(UIAlertAction(title: "Album", style: .default,handler: {[weak self] action in
-//            let qrVC = QRReaderViewController(nibName: nil, bundle: nil)
-//            self.navigationController?.pushViewController(qrVC, animated: true)
+
             let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = .photoLibrary
             self?.present(picker, animated: true)
         }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
         
+    }
+    func qrScannerViewControllerDidDismiss(_ result: String) {
 
-
+        self.viewModel.qrMessage = result
+        
+        if self.viewModel.getLastPurchaseKm() == 0{
+            self.getFirstKmValue()
+        }else{
+            self.getCurrentKMFromUser()
+        }
     }
     
     func getCurrentKMFromUser(){
